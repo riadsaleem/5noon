@@ -34,6 +34,7 @@ export async function storagePut(
   const response = await fetch(`${url}/storage/v1/object/${BUCKET}/${key}`, {
     method: "POST",
     headers: {
+      apikey: apiKey,
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": contentType,
       "x-upsert": "true",
@@ -55,6 +56,6 @@ export async function storageDelete(key: string): Promise<void> {
   const { url, apiKey } = getConfig();
   await fetch(`${url}/storage/v1/object/${BUCKET}/${normalizeKey(key)}`, {
     method: "DELETE",
-    headers: { Authorization: `Bearer ${apiKey}` },
+    headers: { apikey: apiKey, Authorization: `Bearer ${apiKey}` },
   });
 }
