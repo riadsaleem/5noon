@@ -68,7 +68,7 @@ export default function Admin() {
             <div className="bg-blue-50 rounded-lg p-6 border-2 border-blue-200">
               <h3 className="text-xl font-bold text-gray-900 mb-2">إدارة الفروع</h3>
               <p className="text-gray-600 mb-4">إضافة وتعديل وحذف الفروع</p>
-              <Button className="w-full">قريباً</Button>
+              <Button className="w-full" onClick={() => window.location.href = "/admin/branches"}>إدارة الفروع</Button>
             </div>
           </div>
         </div>
