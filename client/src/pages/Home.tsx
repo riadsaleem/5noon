@@ -3,8 +3,16 @@ import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { ShoppingBag, MapPin, Award, TrendingUp, Users, Target, Star, Shield, Heart, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { setPageMeta } from "@/lib/seo";
 
 export default function Home() {
+  setPageMeta({
+    title: "شركة خمسة نون العربية | تجارة وتسوق - وادي الدواسر والخرمة",
+    description:
+      "شركة خمسة نون العربية للتجارة والتسوق — وجهتك الأولى للتسوق الذكي في وادي الدواسر والخرمة. ملابس، عطور، ألعاب، أدوات منزلية، مواد مدرسية وأكثر بأسعار تنافسية.",
+    path: "/",
+  });
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />

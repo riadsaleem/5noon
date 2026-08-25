@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { setPageMeta } from "@/lib/seo";
 
 export default function SimpleLogin() {
   const [, setLocation] = useLocation();
@@ -10,6 +11,11 @@ export default function SimpleLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  setPageMeta({
+    title: "تسجيل الدخول",
+    noindex: true,
+  });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

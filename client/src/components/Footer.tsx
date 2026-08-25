@@ -107,10 +107,22 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-700 pt-3 text-center">
+        {/* Copyright + Developer credit */}
+        <div className="border-t border-gray-700 pt-3 text-center space-y-2">
           <p className="text-gray-400 text-xs md:text-sm">
-            © 2025 {COMPANY_INFO.nameAr}. جميع الحقوق محفوظة.
+            © 2026 {COMPANY_INFO.nameAr}. جميع الحقوق محفوظة.
+          </p>
+          <p className="text-gray-400 text-xs md:text-sm">
+            تم التطوير بواسطة{" "}
+            <span className="text-yellow-400 font-bold">رياض سليم الثوابي</span>{" "}
+            —{" "}
+            <a
+              href="tel:+967775630269"
+              dir="ltr"
+              className="text-gray-300 hover:text-yellow-400 transition-colors inline-block"
+            >
+              +967 775 630 269
+            </a>
           </p>
         </div>
       </div>

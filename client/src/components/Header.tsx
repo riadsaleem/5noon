@@ -1,12 +1,34 @@
-import { Link } from "wouter";
-import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
+import { Link, useLocation } from "wouter";
+import { useRef, useState } from "react";
+import { APP_LOGO, APP_TITLE } from "@/const";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogIn, LogOut, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
+
+// Secret admin access: click the word "شركة" in the title 3 times quickly.
+function useSecretLogin() {
+  const [, setLocation] = useLocation();
+  const clicks = useRef(0);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  return () => {
+    clicks.current += 1;
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      clicks.current = 0;
+    }, 1200);
+    if (clicks.current >= 3) {
+      clicks.current = 0;
+      setLocation("/login");
+    }
+  };
+}
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth();
-  
+  const secretClick = useSecretLogin();
+  const [loggingOut, setLoggingOut] = useState(false);
+
   const navLinks = [
     { href: "/", label: "الرئيسية" },
     { href: "/categories", label: "الأقسام" },
@@ -14,21 +36,31 @@ export default function Header() {
   ];
 
   // Add admin link only for authenticated admin users
-  if (isAuthenticated && user?.role === 'admin') {
+  if (isAuthenticated && user?.role === "admin") {
     navLinks.push({ href: "/admin", label: "لوحة التحكم" });
   }
 
-  const handleLogin = () => {
-    window.location.href = getLoginUrl();
+  const handleLogout = async () => {
+    if (!confirm("هل أنت متأكد من تسجيل الخروج؟")) return;
+    setLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      window.location.href = "/";
+    }
   };
 
-  const handleLogout = () => {
-    if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
-      logout();
-      // Force reload to clear all state
-      window.location.href = "/";
-      window.location.reload();
-    }
+  // Render title with a hidden triple-click trigger on the word "شركة"
+  const renderTitle = (className: string) => {
+    const words = APP_TITLE.split(" ");
+    return (
+      <span className={className}>
+        <span onClick={secretClick} className="cursor-default select-none">
+          {words[0]}
+        </span>{" "}
+        {words.slice(1).join(" ")}
+      </span>
+    );
   };
 
   return (
@@ -39,12 +71,12 @@ export default function Header() {
           {/* Logo and Title */}
           <Link href="/">
             <div className="flex items-center gap-3 cursor-pointer">
-              <img 
-                src={APP_LOGO} 
-                alt={APP_TITLE} 
+              <img
+                src={APP_LOGO}
+                alt={APP_TITLE}
                 className="h-14 w-14 object-cover rounded-full"
               />
-              <span className="text-2xl font-bold text-gray-700 whitespace-nowrap">{APP_TITLE}</span>
+              {renderTitle("text-2xl font-bold text-gray-700 whitespace-nowrap")}
             </div>
           </Link>
 
@@ -59,16 +91,17 @@ export default function Header() {
                 </Link>
               ))}
             </nav>
-            
-            {/* Auth Button */}
-            {isAuthenticated ? (
+
+            {/* Auth state (no visible login button - access is via secret gesture) */}
+            {isAuthenticated && (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 text-gray-700">
                   <User className="w-5 h-5" />
                   <span className="text-sm font-medium">{user?.name || user?.email}</span>
                 </div>
-                <Button 
+                <Button
                   onClick={handleLogout}
+                  disabled={loggingOut}
                   variant="outline"
                   size="sm"
                   className="gap-2"
@@ -77,27 +110,18 @@ export default function Header() {
                   تسجيل خروج
                 </Button>
               </div>
-            ) : (
-              <Button 
-                onClick={handleLogin}
-                className="bg-yellow-600 hover:bg-yellow-700 gap-2"
-                size="sm"
-              >
-                <LogIn className="w-4 h-4" />
-                تسجيل دخول
-              </Button>
             )}
           </div>
         </div>
 
         {/* Mobile Header */}
         <div className="md:hidden py-3">
-          {/* First Row: Logo, Title, and Auth Button */}
-          <div className="flex items-center justify-between mb-3">
-            {/* Auth Button - Left Side */}
+          {/* First Row: Logo, Title, and Auth */}
+          <div className="flex items-center justify-between mb-3 min-h-[48px]">
             {isAuthenticated ? (
-              <Button 
+              <Button
                 onClick={handleLogout}
+                disabled={loggingOut}
                 variant="outline"
                 size="sm"
                 className="gap-1 text-xs px-2 py-1 h-8"
@@ -106,23 +130,16 @@ export default function Header() {
                 خروج
               </Button>
             ) : (
-              <Button 
-                onClick={handleLogin}
-                className="bg-yellow-600 hover:bg-yellow-700 gap-1 text-xs px-2 py-1 h-8"
-                size="sm"
-              >
-                <LogIn className="w-3 h-3" />
-                دخول
-              </Button>
+              <span className="w-8" aria-hidden />
             )}
 
             {/* Logo and Title - Right Side */}
             <Link href="/">
               <div className="flex items-center gap-2 cursor-pointer">
-                <span className="text-lg font-bold text-gray-700 whitespace-nowrap">{APP_TITLE}</span>
-                <img 
-                  src={APP_LOGO} 
-                  alt={APP_TITLE} 
+                {renderTitle("text-lg font-bold text-gray-700 whitespace-nowrap")}
+                <img
+                  src={APP_LOGO}
+                  alt={APP_TITLE}
                   className="h-12 w-12 object-cover rounded-full"
                 />
               </div>

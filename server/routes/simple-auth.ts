@@ -65,7 +65,13 @@ router.post("/simple-login", async (req, res) => {
 });
 
 router.post("/simple-logout", (req, res) => {
-  res.clearCookie(COOKIE_NAME, { path: "/" });
+  // Attributes must mirror the login cookie so the browser deletes it reliably.
+  res.clearCookie(COOKIE_NAME, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+  });
   res.json({ success: true, message: "تم تسجيل الخروج بنجاح" });
 });
 

@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import { Loader2 } from "lucide-react";
+import { setPageMeta } from "@/lib/seo";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -10,6 +11,13 @@ import 'swiper/css/navigation';
 
 export default function Categories() {
   const { data: categories, isLoading } = trpc.categories.list.useQuery();
+
+  setPageMeta({
+    title: "أقسامنا | شركة خمسة نون العربية",
+    description:
+      "تصفح جميع أقسام شركة خمسة نون العربية: الملابس، العطور، الألعاب، الأدوات المدرسية، البلاستيك، الحلويات، الأواني المنزلية وأكثر من 17 قسم بأسعار تنافسية.",
+    path: "/categories",
+  });
 
   return (
     <div className="min-h-screen flex flex-col">

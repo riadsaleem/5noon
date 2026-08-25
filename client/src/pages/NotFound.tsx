@@ -2,9 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Home } from "lucide-react";
 import { useLocation } from "wouter";
+import { useEffect } from "react";
+import { setPageMeta } from "@/lib/seo";
 
 export default function NotFound() {
   const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    setPageMeta({ title: "الصفحة غير موجودة", noindex: true });
+    document.title = "الصفحة غير موجودة | شركة خمسة نون العربية";
+  }, []);
 
   const handleGoHome = () => {
     setLocation("/");

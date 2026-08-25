@@ -10,10 +10,10 @@ import Branches from "./pages/Branches";
 import Categories from "./pages/Categories";
 import Admin from "./pages/Admin";
 import AdminCategories from "./pages/AdminCategories";
+import AdminBranches from "./pages/AdminBranches";
 import SimpleLogin from "./pages/SimpleLogin";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -23,6 +23,7 @@ function Router() {
       <Route path="/login" component={SimpleLogin} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin/categories" component={AdminCategories} />
+      <Route path="/admin/branches" component={AdminBranches} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

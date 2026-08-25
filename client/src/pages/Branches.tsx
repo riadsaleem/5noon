@@ -2,8 +2,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { trpc } from "@/lib/trpc";
 import { Loader2, MapPin, Phone } from "lucide-react";
+import { setPageMeta } from "@/lib/seo";
 
 export default function Branches() {
+  setPageMeta({
+    title: "فروعنا | شركة خمسة نون العربية - وادي الدواسر والخرمة",
+    description:
+      "فروع شركة خمسة نون العربية: فرع وادي الدواسر (خمسة نون العربية وزهرة محطم الأسعار) وفرع الخرمة (زهرة محطم الأسعار). العناوين وأرقام التواصل ومواقع خرائط جوجل.",
+    path: "/branches",
+  });
+
   const formatPhoneNumber = (phone: string) => {
     // Format phone number like "+966 55 325 3688"
     return phone.replace(/(\+\d{3})(\d{2})(\d{3})(\d{4})/, '$1 $2 $3 $4');
