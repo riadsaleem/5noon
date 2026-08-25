@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS } from "../../shared/const";
 import { SignJWT } from "jose";
 import * as db from "../db";
 import { JWT_SECRET } from "../auth";

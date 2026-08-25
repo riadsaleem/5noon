@@ -9,9 +9,13 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      const client = postgres(process.env.DATABASE_URL, {
+      const url = process.env.DATABASE_URL;
+      // Supabase poolers require TLS; keep plain connections for local dev.
+      const needsSsl = /supabase\.(co|com)/i.test(url);
+      const client = postgres(url, {
         prepare: false,
         max: 10,
+        ...(needsSsl ? { ssl: { rejectUnauthorized: false } } : {}),
       });
       _db = drizzle(client);
     } catch (error) {
