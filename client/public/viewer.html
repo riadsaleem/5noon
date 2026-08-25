@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عارض موقع شركة خمسة نون العربية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .header .url {
+            color: #666;
+            font-size: 14px;
+            background: #f5f5f5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #fbbf24;
+            color: #1f2937;
+        }
+        
+        .btn-primary:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6366f1;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+        
+        .viewer-wrapper {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            height: calc(100vh - 140px);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #fbbf24;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-left: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .info-banner {
+            background: #fef3c7;
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .info-banner strong {
+            color: #92400e;
+            font-size: 16px;
+        }
+        
+        .info-banner p {
+            color: #78350f;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+                text-align: center;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info-banner">
+            <strong>🎉 الموقع جاهز للعرض!</strong>
+            <p>يمكنك التصفح مباشرة من هنا أو فتح الموقع في نافذة جديدة</p>
+        </div>
+        
+        <div class="header">
+            <div>
+                <h1>🏪 موقع شركة خمسة نون العربية</h1>
+                <div class="url">https://3000-iz994g4l9kene3p74ote8-e9f73df0.manusvm.computer</div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="reloadIframe()">🔄 تحديث</button>
+                <a href="https://3000-iz994g4l9kene3p74ote8-e9f73df0.manusvm.computer" target="_blank" class="btn btn-secondary">🔗 فتح في نافذة جديدة</a>
+            </div>
+        </div>
+        
+        <div class="viewer-wrapper">
+            <iframe 
+                id="siteFrame" 
+                src="https://3000-iz994g4l9kene3p74ote8-e9f73df0.manusvm.computer"
+                title="موقع شركة خمسة نون العربية"
+                loading="lazy"
+            ></iframe>
+        </div>
+    </div>
+    
+    <script>
+        function reloadIframe() {
+            const iframe = document.getElementById('siteFrame');
+            iframe.src = iframe.src;
+        }
+        
+        // Auto-reload on errors
+        window.addEventListener('error', function(e) {
+            console.error('Error detected:', e);
+        });
+    </script>
+</body>
+</html>
