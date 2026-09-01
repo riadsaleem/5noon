@@ -1,28 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
-    <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
-    <title>%VITE_APP_TITLE%</title>
-    <!-- Add Google Fonts here, example:
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    -->
+
+    <!-- Favicon — يظهر في تبويب المتصفح وفي نتائج بحث جوجل -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo-circular.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo-circular.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo-circular.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo-circular.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo-circular.png" />
+    <link rel="shortcut icon" href="/logo-circular.png" />
+
+    <!-- Web App Manifest — مطلوب لجوجل عشان يعرض الأيقونة -->
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#4a4340" />
+    <meta name="msapplication-TileColor" content="#4a4340" />
+    <meta name="msapplication-TileImage" content="/logo-circular.png" />
+
+    <title>شركة خمسة نون العربية | تجارة وتسوق - وادي الدواسر والخرمة</title>
+
+    <!-- Meta Description — يظهر تحت العنوان في جوجل -->
+    <meta name="description" content="شركة خمسة نون العربية للتجارة والتسوق — وجهتك الأولى للتسوق الذكي في وادي الدواسر والخرمة. ملابس، عطور، السلع، أدوات منزلية، مواد مدرسية وأكثر بأسعار مناسبة." />
+
+    <!-- Open Graph — لمشاركة الموقع في السوشال ميديا -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://5noon.vercel.app/" />
+    <meta property="og:title" content="شركة خمسة نون العربية | تجارة وتسوق" />
+    <meta property="og:description" content="وجهتك الأولى للتسوق الذكي في وادي الدواسر والخرمة. ملابس، عطور، السلع، أدوات منزلية ومواد مدرسية وأكثر." />
+    <meta property="og:image" content="https://5noon.vercel.app/logo-circular.png" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content="شركة خمسة نون العربية" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="شركة خمسة نون العربية | تجارة وتسوق" />
+    <meta name="twitter:description" content="وجهتك الأولى للتسوق الذكي في وادي الدواسر والخرمة." />
+    <meta name="twitter:image" content="https://5noon.vercel.app/logo-circular.png" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   </body>
 
 </html>
