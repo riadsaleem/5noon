@@ -1,0 +1,29 @@
+name: supabase-keepalive
+
+on:
+  # كل يومين الساعة 03:00 UTC — يمنع إيقاف مشروع Supabase المجاني بسبب الخمول
+  schedule:
+    - cron: "0 3 */2 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping site API (touches Supabase)
+        run: |
+          base="https://www.5noonalarabia.com/api/trpc"
+          for endpoint in categories.list branches.list; do
+            code=""
+            for attempt in 1 2 3; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" "$base/$endpoint" -H "trpc-accept: application/json")
+              echo "$endpoint attempt $attempt -> $code"
+              if [ "$code" = "200" ]; then break; fi
+              sleep 10
+            done
+            if [ "$code" != "200" ]; then
+              echo "FAILED: $endpoint returned $code"
+              exit 1
+            fi
+          done
+          echo "Supabase keep-alive OK at $(date -u)"

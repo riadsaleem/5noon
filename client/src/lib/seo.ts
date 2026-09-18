@@ -1,4 +1,4 @@
-const SITE_URL = "https://5noon.vercel.app";
+const SITE_URL = "https://www.5noonalarabia.com";
 const DEFAULT_TITLE = "شركة خمسة نون العربية | تجارة وتسوق - وادي الدواسر والخرمة";
 const DEFAULT_DESCRIPTION =
   "شركة خمسة نون العربية للتجارة والتسوق — فروعنا في وادي الدواسر والخرمة. ملابس، عطور، ألعاب، أدوات منزلية وأكثر بأسعار تنافسية.";
