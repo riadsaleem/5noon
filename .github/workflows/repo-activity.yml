@@ -1,0 +1,29 @@
+name: repo-activity
+
+# يرفع commit بسيط كل شهر حتى ما يوقف GitHub المهام المجدولة بعد 60 يوم خمول.
+on:
+  schedule:
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  touch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Commit activity timestamp
+        run: |
+          mkdir -p .github
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/activity.log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/activity.log
+          if git diff --cached --quiet; then
+            echo "no change"
+          else
+            git commit -m "chore: repo activity keep-alive [vercel skip]"
+            git push
+          fi
